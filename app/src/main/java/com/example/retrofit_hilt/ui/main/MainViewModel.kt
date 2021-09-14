@@ -6,10 +6,11 @@ import androidx.lifecycle.liveData
 import com.example.retrofit_hilt.model.GitHubDataModel
 import com.example.retrofit_hilt.model.ResultData
 import com.example.retrofit_hilt.usecase.DataUseCase
-import dagger.hilt.android.scopes.ViewModelScoped
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-
-class MainViewModel @ViewModelScoped constructor(private val dataUseCase: DataUseCase) : ViewModel() {
+@HiltViewModel
+class MainViewModel @Inject constructor(private val dataUseCase: DataUseCase) : ViewModel() {
     //when calling suspend fun ....as useCase nu suspend fun call karyu chhe
     //option - 1. make fun suspend
     //option - 2. use it inside coroutine.
