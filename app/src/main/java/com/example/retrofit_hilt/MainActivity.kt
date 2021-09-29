@@ -15,14 +15,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         activityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(activityMainBinding.root)
-        if (savedInstanceState == null) {    //fragment no Instance.
+        if (savedInstanceState == null) { // fragment no Instance.
             supportFragmentManager.beginTransaction()
                 .replace(activityMainBinding.container.id, MainFragment.newInstance())
                 .commit()
         }
-
     }
 }
 
-//To use Hilt in project -
-//1. create Application class. Define this class in Manifest.
+// To use Hilt in project -
+// 1. create Application class. Define this class in Manifest.

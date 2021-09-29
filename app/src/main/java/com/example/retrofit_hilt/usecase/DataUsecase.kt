@@ -9,9 +9,9 @@ class DataUseCase @Inject constructor(private val dataRepository: DataRepository
     suspend fun getRepositoriesList(): ResultData<GitHubDataModel> {
         val publicRepositories = dataRepository.getPublicRepositories()
 
-        val resultData = if (!publicRepositories.isNullOrEmpty()){
-            ResultData.Success(publicRepositories) //we will use Sealed class here..for success
-        }else{
+        val resultData = if (!publicRepositories.isNullOrEmpty()) {
+            ResultData.Success(publicRepositories) // we will use Sealed class here..for success
+        } else {
             ResultData.Failed("Something went wrong, Please try again later!")
         }
         return resultData

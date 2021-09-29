@@ -1,9 +1,8 @@
 package com.example.retrofit_hilt.model
 
-
 import com.google.gson.annotations.SerializedName
 
-class GitHubDataModel : ArrayList<GitHubDataModel.GitHubDataModelItem>(){
+class GitHubDataModel : ArrayList<GitHubDataModel.GitHubDataModelItem>() {
     data class GitHubDataModelItem(
         @SerializedName("archive_url")
         val archiveUrl: String,
@@ -116,7 +115,7 @@ class GitHubDataModel : ArrayList<GitHubDataModel.GitHubDataModelItem>(){
             @SerializedName("id")
             val id: Int,
             @SerializedName("login")
-            val login: String, 
+            val login: String,
             @SerializedName("node_id")
             val nodeId: String,
             @SerializedName("organizations_url")

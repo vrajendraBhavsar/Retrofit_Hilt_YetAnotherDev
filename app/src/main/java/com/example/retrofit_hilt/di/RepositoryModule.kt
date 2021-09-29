@@ -7,7 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityRetainedComponent
 
-//we will be using repositories in Vm, so we should make this module live as long as application is alive ...don't use "SingletonComponent"
+// we will be using repositories in Vm, so we should make this module live as long as application is alive ...don't use "SingletonComponent"
 @InstallIn(ActivityRetainedComponent::class)
 @Module
 object RepositoryModule {

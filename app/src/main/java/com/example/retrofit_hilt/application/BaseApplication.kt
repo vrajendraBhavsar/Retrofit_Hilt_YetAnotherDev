@@ -4,6 +4,6 @@ import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
-class BaseApplication : Application()   //don't forget to add this class into Manifest file
+class BaseApplication : Application() // don't forget to add this class into Manifest file
 
-//This will tell hilt that this Application is using Hilt.
+// This will tell hilt that this Application is using Hilt.
