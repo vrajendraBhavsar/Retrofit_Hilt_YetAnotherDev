@@ -12,6 +12,8 @@ import androidx.lifecycle.Observer
 import com.example.retrofit_hilt.R
 import com.example.retrofit_hilt.databinding.FragmentMainBinding
 import com.example.retrofit_hilt.model.ResultData
+import com.example.retrofit_hilt.test.CompareAnimalTest
+import com.example.retrofit_hilt.test.Dog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.DelicateCoroutinesApi
 
@@ -37,6 +39,7 @@ class MainFragment : Fragment() {
     @DelicateCoroutinesApi
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        println("Compare : ${CompareAnimalTest().dogCompare.compare(Dog(20), Dog(40))}")
 //        val repositoriesList = mainFragment.getRepositoriesList() // this var contains lv ..coming from vm
 //        repositoriesList.observe(
         mainFragment.getRepositoriesList()
