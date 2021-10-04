@@ -1,6 +1,8 @@
 package com.example.retrofit_hilt.ui.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.retrofit_hilt.R
 import com.example.retrofit_hilt.adapter.DataAdapter
 import com.example.retrofit_hilt.databinding.FragmentMainBinding
@@ -20,6 +23,7 @@ import kotlinx.coroutines.DelicateCoroutinesApi
 
 @AndroidEntryPoint // so Hilt aahi badhi dependency available karavi aapshe..
 class MainFragment : Fragment() {
+    val dataList: MutableList<GitHubDataModel> = ArrayList()    //List
     //for pagination
     var page = 1
     var isLoading = false
@@ -39,17 +43,41 @@ class MainFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         layoutManager = LinearLayoutManager(requireContext())
         binding.dataListRecyclerView.layoutManager = layoutManager
+
+        //to listen scrolling of recyclerView..onScrollListener
+        binding.dataListRecyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                if (dy>0){  //means scrollview scrolled vertically ..6:38 - https://www.youtube.com/watch?v=FELCnTNpS_o
+
+                }
+            }
+        })
+
         return inflater.inflate(R.layout.fragment_main, container, false)
     }
     //for mocking network communication
+    @SuppressLint("NotifyDataSetChanged")
     fun getPage(gitHubDataModel: GitHubDataModel?) {
         //here we will populate list
+        binding.progressBar.visibility = View.VISIBLE   //while loading data..its visible
         val start = ((page) * limit) + 1
         val end = (page) * limit
 
         for (i in start..end){
-            gitHubDataModel.add("item")
+            gitHubDataModel?.let { dataList.add(it) }
         }
+        Handler().postDelayed({
+            if (::adapter.isInitialized) {  //checking if adapter is initialized or not
+                adapter.notifyDataSetChanged()
+            } else {
+                adapter = DataAdapter(requireContext())
+                binding.dataListRecyclerView.adapter = adapter
+            }
+            isLoading = false
+            binding.progressBar.visibility = View.GONE
+        }, 5000)
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -12,7 +12,6 @@ import com.example.retrofit_hilt.model.GitHubDataModel
 
 class DataAdapter(val context: Context): RecyclerView.Adapter<DataAdapter.DataViewHolder>() {
 
-    val dataList: MutableList<GitHubDataModel> = ArrayList()    //List
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DataViewHolder {
         return DataViewHolder(LayoutInflater.from(context).inflate(R.layout.data_view, parent, false))
