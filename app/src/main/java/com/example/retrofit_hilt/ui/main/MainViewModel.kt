@@ -30,9 +30,9 @@ class MainViewModel @Inject constructor(private val dataUseCase: DataUseCase) : 
     private val _githubDataModelLiveData = MutableLiveData<ResultData<GitHubDataModel>>()
     internal val githubDataModelLiveData: LiveData<ResultData<GitHubDataModel>> = _githubDataModelLiveData
 
-    fun getRepositoriesList() {
+    fun getRepositoriesList(page: Int) {
         val job: Job = GlobalScope.launch(Dispatchers.IO) {
-            _githubDataModelLiveData.postValue(dataUseCase.getRepositoriesList())
+            _githubDataModelLiveData.postValue(dataUseCase.getRepositoriesList(page = page))
         }
     }
 }
